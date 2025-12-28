@@ -23,6 +23,64 @@ body {
   filter: brightness(0.9);
   -webkit-filter: brightness(0.9);
 }
+/* Penyesuaian Header Sidebar */
+.sidebar-header {
+  padding: 2.5rem 1.5rem !important; /* Ruang lebih lega */
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 1rem;
+}
+
+/* Ukuran Logo/Nama Brand */
+.sidebar-header h2 {
+  font-size: 1.85rem; /* Lebih besar */
+  letter-spacing: 3px; /* Jarak antar huruf agar terlihat mewah */
+  margin-bottom: 0.5rem;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+}
+
+/* Badge Dashboard di bawah Logo */
+.sidebar-header .badge {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  padding: 6px 15px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #818cf8;
+}
+
+/* Penyesuaian Link Navigasi agar Lebih Besar & Rapi */
+#sidebar .components li a {
+  font-size: 1.1rem; /* Ukuran tulisan menu lebih besar */
+  font-weight: 500;
+  padding: 14px 20px !important; /* Padding lebih tebal */
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Jarak antara icon dan tulisan */
+  color: #cbd5e1; /* Warna abu-abu terang agar rapi */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ukuran Icon di samping tulisan */
+#sidebar .components li a i {
+  font-size: 1.3rem;
+  width: 25px; /* Lebar tetap agar teks sejajar vertikal */
+  text-align: center;
+}
+
+/* Efek Hover & Active yang lebih tegas */
+#sidebar .components li.active a {
+  background: var(--primary-gradient);
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+  transform: scale(1.02); /* Sedikit membesar saat aktif */
+}
+
+#sidebar .components li a:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding-left: 25px !important; /* Geser sedikit ke kanan saat hover */
+}
 
 /* Glassmorphism */
 .glass-panel,
