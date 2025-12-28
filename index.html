@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMYCHAIN - Web3 Dashboard</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-overlay"></div>
+
+    <!-- Toast Container -->
+    <div
+      id="toastContainer"
+      class="position-fixed bottom-0 end-0 p-3"
+      style="z-index: 1080"></div>
+
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <nav id="sidebar" class="glass-panel">
+        <div class="sidebar-header p-4 text-center">
+          <h2 class="text-gradient fw-bold">UMYCHAIN</h2>
+          <span class="badge bg-outline-info">Web3 Dashboard</span>
+        </div>
+        <ul class="list-unstyled components p-3">
+          <li class="active">
+            <a href="#"><i class="bi bi-grid-1x2-fill me-2"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-wallet2 me-2"></i> Assets</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-plus-square me-2"></i> Mint NFT</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-clock-history me-2"></i> History</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-gear me-2"></i> Settings</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <div id="content" class="w-100">
+        <!-- Navbar Atas -->
+        <nav class="navbar navbar-expand-lg glass-panel-sm mb-4 sticky-top">
+          <div class="container-fluid px-4">
+            <button
+              type="button"
+              id="sidebarCollapse"
+              class="btn btn-outline-light me-3">
+              <i class="bi bi-list"></i>
+            </button>
+
+            <div class="d-flex align-items-center gap-3 ms-auto">
+              <div class="network-badge">
+                <span id="networkStatus" class="badge rounded-pill bg-danger"
+                  >Not Connected</span
+                >
+              </div>
+              <button
+                id="connectWallet"
+                class="btn btn-gradient px-4 rounded-pill">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <span id="walletBtnText">Connect Wallet</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Konten Dashboard -->
+        <div class="container-fluid px-4">
+          <!-- Info Kontrak -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="glass-card p-3 d-flex align-items-center">
+                <div class="icon-box bg-primary-soft me-3">
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <div>
+                  <small class="text-secondary d-block"
+                    >UMYC Smart Contract</small
+                  >
+                  <span id="coinAddrDisplay" class="font-monospace text-info"
+                    >Not Connected</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass-card p-3 d-flex align-items-center">
+                <div class="icon-box bg-info-soft me-3">
+                  <i class="bi bi-image"></i>
+                </div>
+                <div>
+                  <small class="text-secondary d-block"
+                    >NFT Collection Address</small
+                  >
+                  <span id="nftAddrDisplay" class="font-monospace text-info"
+                    >Not Connected</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Kiri & Kanan -->
+          <div class="row g-4">
+            <!-- Saldo & Transfer -->
+            <div class="col-lg-5">
+              <div class="glass-card h-100 p-4">
+                <h5 class="fw-bold mb-4">Saldo Dompet</h5>
+                <div class="balance-container text-center py-4">
+                  <h1
+                    class="display-4 fw-bold text-white mb-0"
+                    id="balanceCoin">
+                    0.00
+                  </h1>
+                  <p class="text-info fw-bold">UMYC Token</p>
+                </div>
+                <hr class="border-secondary" />
+                <div class="transfer-section mt-4">
+                  <label class="form-label small">Kirim Aset</label>
+                  <input
+                    type="text"
+                    id="toAddress"
+                    class="form-control glass-input mb-3"
+                    placeholder="Alamat Tujuan" />
+                  <input
+                    type="number"
+                    id="amountCoin"
+                    class="form-control glass-input mb-3"
+                    placeholder="Jumlah" />
+                  <button
+                    id="btnTransfer"
+                    class="btn btn-primary w-100 py-2 fw-bold">
+                    Transfer Sekarang
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aksi Cepat -->
+            <div class="col-lg-7">
+              <div class="glass-card h-100 p-4">
+                <h5 class="fw-bold mb-4">Aksi Cepat</h5>
+                <div class="row g-3">
+                  <div class="col-md-12">
+                    <div class="p-4 rounded-4 bg-white-5">
+                      <h6>Mint NFT Baru</h6>
+                      <div class="input-group mt-3">
+                        <input
+                          type="text"
+                          id="mintURI"
+                          class="form-control glass-input"
+                          placeholder="ipfs://..." />
+                        <button id="btnMint" class="btn btn-info px-4">
+                          Mint
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div
+                      id="statusBox"
+                      class="p-3 rounded-4 border-start border-4 border-info bg-dark-50">
+                      <small class="text-uppercase fw-bold text-secondary"
+                        >System Logs</small
+                      >
+                      <div id="statusMsg" class="small mt-1">
+                        Menunggu koneksi dompet...
+                      </div>
+                      <!--  Tampilkan hash penuh -->
+                      <div
+                        id="txHashText"
+                        class="text-muted small mb-1 font-monospace"></div>
+                      <div id="txHash" class="d-none mt-2">
+                        <a
+                          id="txLink"
+                          target="_blank"
+                          class="text-info small fw-bold">
+                          View on Explorer
+                          <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Galeri NFT -->
+          <div class="mt-5 mb-5">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+              <div>
+                <h3 class="fw-bold mb-0">Galeri Digital</h3>
+                <p class="text-secondary small">
+                  Koleksi NFT yang tersimpan di blockchain
+                </p>
+              </div>
+              <span class="badge bg-primary px-3 py-2" id="nftCount"
+                >0 Assets</span
+              >
+            </div>
+            <div id="nftList" class="row g-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="abi_coin.js"></script>
+    <script src="abi_nft.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
